@@ -9,16 +9,17 @@
       --neon-blue: #00f0ff;
       --neon-purple: #bf00ff;
       --neon-pink: #ff00aa;
-      --card-bg: rgba(10, 10, 30, 0.75);
-      --border-glow: rgba(0, 240, 255, 0.3);
+      --neon-green: #00ff88;
+      --card-bg: rgba(8, 8, 28, 0.72);
+      --border-glow: rgba(0, 240, 255, 0.25);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: #050510;
-      color: #e0e0ff;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #030312;
+      color: #dde0ff;
       min-height: 100vh;
       overflow-x: hidden;
     }
@@ -35,167 +36,209 @@
       z-index: 1;
       max-width: 1100px;
       margin: 0 auto;
-      padding: 40px 20px 80px;
+      padding: 40px 20px 100px;
     }
 
-    /* Hero */
+    /* ===== HERO ===== */
     .hero {
       text-align: center;
-      padding: 60px 0 50px;
+      padding: 70px 0 55px;
     }
 
     .avatar-wrap {
       display: inline-block;
       position: relative;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
 
     .avatar-wrap::before {
       content: '';
       position: absolute;
-      inset: -4px;
+      inset: -5px;
       border-radius: 50%;
-      background: conic-gradient(var(--neon-blue), var(--neon-purple), var(--neon-pink), var(--neon-blue));
-      animation: spin 4s linear infinite;
+      background: conic-gradient(
+        var(--neon-blue) 0deg,
+        var(--neon-purple) 120deg,
+        var(--neon-pink) 240deg,
+        var(--neon-blue) 360deg
+      );
+      animation: spin 3.5s linear infinite;
       z-index: -1;
     }
 
-    .avatar-emoji {
-      width: 110px;
-      height: 110px;
+    .avatar-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -14px;
       border-radius: 50%;
-      border: 3px solid #050510;
-      background: linear-gradient(135deg, #1a1a3e, #0d0d2b);
+      background: conic-gradient(
+        var(--neon-blue) 0deg,
+        var(--neon-purple) 120deg,
+        var(--neon-pink) 240deg,
+        var(--neon-blue) 360deg
+      );
+      opacity: 0.25;
+      animation: spin 3.5s linear infinite reverse;
+      z-index: -2;
+      filter: blur(8px);
+    }
+
+    .avatar-inner {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #030312;
+      background: linear-gradient(135deg, #12123a, #0a0a22);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 52px;
+      font-size: 58px;
+      user-select: none;
     }
 
     .hero-title {
-      font-size: clamp(2rem, 6vw, 3.4rem);
+      font-size: clamp(1.9rem, 5.5vw, 3.2rem);
       font-weight: 900;
       letter-spacing: 2px;
-      background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple), var(--neon-pink), var(--neon-blue));
+      background: linear-gradient(90deg,
+        var(--neon-blue) 0%,
+        var(--neon-purple) 33%,
+        var(--neon-pink) 66%,
+        var(--neon-blue) 100%
+      );
       background-size: 300% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: gradientShift 4s linear infinite, glitch 6s infinite;
+      animation: gradientShift 4s linear infinite, glitch 7s infinite;
+      line-height: 1.2;
     }
 
     .hero-sub {
-      margin-top: 14px;
-      font-size: clamp(1rem, 3vw, 1.2rem);
-      color: rgba(200, 200, 255, 0.75);
-      letter-spacing: 1px;
+      margin-top: 16px;
+      font-size: clamp(0.95rem, 2.8vw, 1.15rem);
+      color: rgba(200, 205, 255, 0.65);
+      letter-spacing: 1.5px;
     }
 
-    /* Section */
+    /* ===== SECTION ===== */
     .section {
-      margin-top: 60px;
+      margin-top: 64px;
     }
 
-    .section-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--neon-blue);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      margin-bottom: 24px;
+    .section-label {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      margin-bottom: 26px;
     }
 
-    .section-title::after {
+    .section-label .icon {
+      font-size: 1.4rem;
+    }
+
+    .section-label h2 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: var(--neon-blue);
+    }
+
+    .section-label::after {
       content: '';
       flex: 1;
       height: 1px;
-      background: linear-gradient(90deg, var(--neon-blue), transparent);
+      background: linear-gradient(90deg, var(--neon-blue) 0%, transparent 100%);
     }
 
-    /* Cards */
+    /* ===== CARDS ===== */
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 16px;
     }
 
     .card {
       background: var(--card-bg);
       border: 1px solid var(--border-glow);
-      border-radius: 14px;
-      padding: 22px 18px;
+      border-radius: 16px;
+      padding: 22px 20px 20px;
       text-decoration: none;
       color: inherit;
-      backdrop-filter: blur(12px);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      transition: transform 0.28s cubic-bezier(.22,1,.36,1),
+                  box-shadow 0.28s ease,
+                  border-color 0.28s ease;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 7px;
+      cursor: pointer;
     }
 
-    .card:hover {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 0 24px rgba(0, 240, 255, 0.45), 0 0 60px rgba(191, 0, 255, 0.2);
+    /* Game cards: cyan glow */
+    .card.game:hover {
+      transform: translateY(-8px) scale(1.025);
+      box-shadow:
+        0 0 18px rgba(0, 240, 255, 0.5),
+        0 0 50px rgba(0, 240, 255, 0.15),
+        0 20px 40px rgba(0, 0, 0, 0.5);
       border-color: var(--neon-blue);
     }
 
-    .card-icon { font-size: 1.8rem; }
+    /* App cards: purple glow */
+    .card.app:hover {
+      transform: translateY(-8px) scale(1.025);
+      box-shadow:
+        0 0 18px rgba(191, 0, 255, 0.5),
+        0 0 50px rgba(191, 0, 255, 0.15),
+        0 20px 40px rgba(0, 0, 0, 0.5);
+      border-color: var(--neon-purple);
+    }
+
+    .card.app:hover .card-arrow { color: var(--neon-purple); }
+
+    .card-icon { font-size: 2rem; line-height: 1; }
 
     .card-name {
       font-size: 1rem;
       font-weight: 700;
       color: #fff;
+      margin-top: 4px;
     }
 
     .card-desc {
-      font-size: 0.8rem;
-      color: rgba(180, 180, 220, 0.7);
+      font-size: 0.78rem;
+      color: rgba(180, 185, 220, 0.65);
+      line-height: 1.4;
+      flex: 1;
     }
 
     .card-arrow {
-      margin-top: auto;
+      margin-top: 10px;
       font-size: 0.75rem;
       color: var(--neon-blue);
-      opacity: 0.7;
+      opacity: 0.8;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: opacity 0.2s;
     }
 
-    /* Video Grid */
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 18px;
+    .card:hover .card-arrow { opacity: 1; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      margin-top: 90px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(0, 240, 255, 0.1);
+      font-size: 0.8rem;
+      color: rgba(140, 145, 190, 0.5);
+      letter-spacing: 0.5px;
     }
 
-    .video-wrap {
-      background: var(--card-bg);
-      border: 1px solid var(--border-glow);
-      border-radius: 14px;
-      overflow: hidden;
-      backdrop-filter: blur(12px);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .video-wrap:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 0 24px rgba(0, 240, 255, 0.35);
-    }
-
-    .video-wrap iframe {
-      width: 100%;
-      aspect-ratio: 16/9;
-      border: none;
-      display: block;
-    }
-
-    .video-wrap.shorts iframe {
-      aspect-ratio: 9/16;
-      max-height: 420px;
-    }
-
-    /* Animations */
+    /* ===== ANIMATIONS ===== */
     @keyframes gradientShift {
       0%   { background-position: 0% center; }
       100% { background-position: 300% center; }
@@ -206,22 +249,32 @@
     }
 
     @keyframes glitch {
-      0%, 90%, 100% { text-shadow: none; }
-      92% { text-shadow: 3px 0 var(--neon-pink), -3px 0 var(--neon-blue); }
-      94% { text-shadow: -3px 0 var(--neon-pink), 3px 0 var(--neon-blue); }
-      96% { text-shadow: 3px 0 var(--neon-pink), -3px 0 var(--neon-blue); }
+      0%, 88%, 100% { text-shadow: none; filter: none; }
+      90% {
+        text-shadow: 3px 0 var(--neon-pink), -3px 0 var(--neon-blue);
+        filter: hue-rotate(5deg);
+      }
+      92% {
+        text-shadow: -3px 0 var(--neon-pink), 3px 0 var(--neon-blue);
+        filter: hue-rotate(-5deg);
+      }
+      94% {
+        text-shadow: 3px 0 var(--neon-pink), -3px 0 var(--neon-blue);
+        filter: none;
+      }
     }
 
-    footer {
-      text-align: center;
-      margin-top: 80px;
-      font-size: 0.8rem;
-      color: rgba(150, 150, 200, 0.5);
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .hero { padding: 50px 0 40px; }
+      .avatar-inner { width: 100px; height: 100px; font-size: 46px; }
+      .cards { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .card { padding: 16px 14px; }
+      .card-icon { font-size: 1.6rem; }
     }
 
-    @media (max-width: 480px) {
-      .cards { grid-template-columns: 1fr 1fr; }
-      .video-grid { grid-template-columns: 1fr; }
+    @media (max-width: 360px) {
+      .cards { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -234,137 +287,99 @@
   <!-- Hero -->
   <section class="hero">
     <div class="avatar-wrap">
-      <div class="avatar-emoji">🤖</div>
+      <div class="avatar-inner">🤖</div>
     </div>
-    <h1 class="hero-title">Tommy's AI 作品集</h1>
+    <h1 class="hero-title">Tommy 的 AI 作品集</h1>
     <p class="hero-sub">欢迎和我一起玩 AI ~~</p>
   </section>
 
-  <!-- 游戏 -->
+  <!-- AI 游戏 -->
   <section class="section">
-    <h2 class="section-title">🎮 我的 AI 游戏</h2>
+    <div class="section-label">
+      <span class="icon">🎮</span>
+      <h2>我的 AI 游戏</h2>
+    </div>
     <div class="cards">
-      <a class="card" href="https://match.tina-ai.xyz/" target="_blank" rel="noopener">
-        <span class="card-icon">🍬</span>
-        <span class="card-name">消消乐</span>
-        <span class="card-desc">经典三消玩法，AI 加持</span>
-        <span class="card-arrow">→ 立即游玩</span>
-      </a>
-      <a class="card" href="https://card.tina-ai.xyz/" target="_blank" rel="noopener">
+
+      <a class="card game" href="https://card.tangxiaomi.xyz/" target="_blank" rel="noopener">
         <span class="card-icon">🃏</span>
-        <span class="card-name">卡牌游戏</span>
-        <span class="card-desc">策略卡牌对战</span>
+        <span class="card-name">疯狂八点卡牌游戏</span>
+        <span class="card-desc">策略卡牌对战，AI 生成的烧脑八点玩法</span>
         <span class="card-arrow">→ 立即游玩</span>
       </a>
-      <a class="card" href="https://sum.tina-ai.xyz/" target="_blank" rel="noopener">
-        <span class="card-icon">🔢</span>
-        <span class="card-name">数块消除</span>
-        <span class="card-desc">数字益智消除游戏</span>
+
+      <a class="card game" href="https://xjsj.tangxiaomi.xyz/" target="_blank" rel="noopener">
+        <span class="card-icon">🚀</span>
+        <span class="card-name">新星射击游戏</span>
+        <span class="card-desc">星空射击冒险，考验你的反应极限</span>
         <span class="card-arrow">→ 立即游玩</span>
       </a>
-      <a class="card" href="https://tafang.tina-ai.xyz/" target="_blank" rel="noopener">
-        <span class="card-icon">🛡️</span>
-        <span class="card-name">新星防御</span>
-        <span class="card-desc">塔防策略游戏</span>
+
+      <a class="card game" href="https://xjxf.tangxiaomi.xyz/" target="_blank" rel="noopener">
+        <span class="card-icon">🌌</span>
+        <span class="card-name">星际先锋</span>
+        <span class="card-desc">征战星际战场，成为宇宙霸主</span>
         <span class="card-arrow">→ 立即游玩</span>
       </a>
-      <a class="card" href="https://color.tina-ai.xyz/" target="_blank" rel="noopener">
-        <span class="card-icon">🎨</span>
-        <span class="card-name">色彩敏感度</span>
-        <span class="card-desc">测试你的色彩感知力</span>
-        <span class="card-arrow">→ 立即游玩</span>
-      </a>
-      <a class="card" href="https://gitd2p7yoixz4.ok.kimi.link/" target="_blank" rel="noopener">
-        <span class="card-icon">🧠</span>
-        <span class="card-name">MBTI 人格测试</span>
-        <span class="card-desc">探索你的人格类型</span>
-        <span class="card-arrow">→ 开始测试</span>
-      </a>
+
     </div>
   </section>
 
-  <!-- 应用 -->
+  <!-- AI 应用 -->
   <section class="section">
-    <h2 class="section-title">🚀 我的 AI 应用</h2>
+    <div class="section-label">
+      <span class="icon">⚡</span>
+      <h2>我的 AI 应用</h2>
+    </div>
     <div class="cards">
-      <a class="card" href="https://www.doubao.com/share/code/201655d002efc315" target="_blank" rel="noopener">
-        <span class="card-icon">🎰</span>
-        <span class="card-name">在线抽奖</span>
-        <span class="card-desc">公平透明的抽奖工具</span>
-        <span class="card-arrow">→ 去抽奖</span>
-      </a>
-      <a class="card" href="https://www.doubao.com/share/code/a0b1fb925ce2f00c" target="_blank" rel="noopener">
-        <span class="card-icon">📈</span>
-        <span class="card-name">一次函数可视化</span>
-        <span class="card-desc">动态图形展示函数</span>
+
+      <a class="card app" href="https://number.tangxiaomi.xyz/" target="_blank" rel="noopener">
+        <span class="card-icon">🔢</span>
+        <span class="card-name">数字消消乐</span>
+        <span class="card-desc">益智数字消除，越玩越上瘾</span>
         <span class="card-arrow">→ 去体验</span>
       </a>
-      <a class="card" href="https://www.doubao.com/share/code/4f920f548a279f42" target="_blank" rel="noopener">
-        <span class="card-icon">🌐</span>
+
+      <a class="card app" href="https://www.doubao.com/share/code/16f59b523f856464?is_code=1" target="_blank" rel="noopener">
+        <span class="card-icon">📊</span>
         <span class="card-name">方程 3D 可视化</span>
-        <span class="card-desc">三维空间展示方程</span>
+        <span class="card-desc">三维空间动态展示数学方程</span>
         <span class="card-arrow">→ 去体验</span>
       </a>
-      <a class="card" href="https://www.doubao.com/share/code/cb6e6a8030739bad" target="_blank" rel="noopener">
+
+      <a class="card app" href="https://color-sensitivity-test.vercel.app/" target="_blank" rel="noopener">
         <span class="card-icon">🎨</span>
         <span class="card-name">色彩敏感度测试</span>
-        <span class="card-desc">精准测量色彩感知</span>
+        <span class="card-desc">精准测量你的色彩感知能力</span>
         <span class="card-arrow">→ 去测试</span>
       </a>
-      <a class="card" href="https://www.doubao.com/share/code/172c2ec0a68789b7" target="_blank" rel="noopener">
+
+      <a class="card app" href="https://grammarv2.tangxiaomi.xyz" target="_blank" rel="noopener">
+        <span class="card-icon">📝</span>
+        <span class="card-name">语法练习</span>
+        <span class="card-desc">AI 辅助英语语法训练工具</span>
+        <span class="card-arrow">→ 去练习</span>
+      </a>
+
+      <a class="card app" href="https://www.doubao.com/share/code/172c2ec0a68789b7" target="_blank" rel="noopener">
         <span class="card-icon">📐</span>
         <span class="card-name">单位换算工具</span>
-        <span class="card-desc">快速换算各类单位</span>
+        <span class="card-desc">快速换算长度、重量、温度等单位</span>
         <span class="card-arrow">→ 去换算</span>
       </a>
-      <a class="card" href="https://www.doubao.com/share/code/1e2e90bb7283591e" target="_blank" rel="noopener">
-        <span class="card-icon">📝</span>
+
+      <a class="card app" href="https://www.doubao.com/share/code/1e2e90bb7283591e" target="_blank" rel="noopener">
+        <span class="card-icon">🎧</span>
         <span class="card-name">单词听写助手</span>
-        <span class="card-desc">AI 辅助英语学习</span>
+        <span class="card-desc">AI 语音驱动的英语单词听写练习</span>
         <span class="card-arrow">→ 去学习</span>
       </a>
-    </div>
-  </section>
 
-  <!-- 视频 -->
-  <section class="section">
-    <h2 class="section-title">🎬 我的 AI 视频</h2>
-    <div class="video-grid">
-      <div class="video-wrap shorts">
-        <iframe src="https://www.youtube.com/embed/5nEvFcOiL44"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen loading="lazy"></iframe>
-      </div>
-      <div class="video-wrap">
-        <iframe src="https://www.youtube.com/embed/GwFmxXn7W28"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen loading="lazy"></iframe>
-      </div>
-      <div class="video-wrap">
-        <iframe src="https://www.youtube.com/embed/aEMzDeKrPRk"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen loading="lazy"></iframe>
-      </div>
-      <div class="video-wrap">
-        <iframe src="https://www.youtube.com/embed/H2SGt3X5dwk"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen loading="lazy"></iframe>
-      </div>
-      <div class="video-wrap">
-        <iframe src="https://www.youtube.com/embed/tKSIvYZ4Cmc"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen loading="lazy"></iframe>
-      </div>
-      <div class="video-wrap shorts">
-        <iframe src="https://www.youtube.com/embed/-gin7IRi2ek"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen loading="lazy"></iframe>
-      </div>
     </div>
   </section>
 
   <footer>
-    <p>© 2026 Tommy · Powered by AI &amp; ❤️</p>
+    <p>© 2026 Tommy &nbsp;·&nbsp; Powered by AI &amp; ❤️</p>
   </footer>
 
 </div>
@@ -382,17 +397,17 @@
     minWidth: 200.00,
     scale: 1.00,
     scaleMobile: 1.00,
-    backgroundColor: 0x050510,
+    backgroundColor: 0x030312,
     color1: 0x00f0ff,
     color2: 0xbf00ff,
     colorMode: "lerp",
-    birdSize: 1.2,
-    wingSpan: 28,
-    speedLimit: 4,
-    separation: 60,
+    birdSize: 1.3,
+    wingSpan: 26,
+    speedLimit: 4.5,
+    separation: 65,
     alignment: 50,
     cohesion: 50,
-    quantity: 3
+    quantity: 4
   });
 </script>
 
